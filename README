@@ -56,4 +56,5 @@ msf  auxiliary(sms_spoof_smspm) > run
 [*] Auxiliary module execution completed
 msf  auxiliary(sms_spoof_smspm) >
 
-
+screenshot:
+http://t.co/6SKY9YSm
