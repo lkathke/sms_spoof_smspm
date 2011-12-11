@@ -1,0 +1,59 @@
+y0ug@alpha:~/src/msf$ msfconsole 
+       =[ metasploit v4.2.0-dev [core:4.2 api:1.0]
++ -- --=[ 778 exploits - 410 auxiliary - 121 post
++ -- --=[ 228 payloads - 27 encoders - 8 nops
+
+msf > use auxiliary/gather/sms_spoof_smspm 
+msf  auxiliary(sms_spoof_smspm) > info
+
+       Name: Spoof SMS (SMSPM.COM)
+     Module: auxiliary/gather/sms_spoof_smspm
+    Version: 0
+    License: Metasploit Framework License (BSD)
+       Rank: Normal
+
+Provided by:
+  Hugo Caron <y0ug@codsec.com>
+
+Basic options:
+  Name        Current Setting  Required  Description
+  ----        ---------------  --------  -----------
+  BALANCE     false            no        Only check the balance
+  MSG                          yes       Message to send
+  PHONE                        yes       The recipient in international format
+  Proxies                      no        Use a proxy chain
+  SECRETHASH                   yes       The SMSPOINT secret hash
+  SENDER                       yes       Sender id can be a word or just a number
+  VHOST       panel.smspm.com  yes       The virtual host name to use in requests
+
+Description:
+  This module uses the SMSPOINT API to send spoofed sms API: 
+  http://www.smspm.com/misc/docs/SMSPM_API_1.4.pdf Get secret hash: 
+  http://www.smspm.com/
+
+msf  auxiliary(sms_spoof_smspm) > set SECRETHASH 71a3aee56507f2126b92ca425c32ccc68bf27d52
+SECRETHASH => 71a3aee56507f2126b92ca425c32ccc68bf27d52
+msf  auxiliary(sms_spoof_smspm) > set SENDER w00t
+SENDER => w00t
+msf  auxiliary(sms_spoof_smspm) > set PHONE +33650044080
+PHONE => +33650044080
+msf  auxiliary(sms_spoof_smspm) > set MSG "WTF dude!"
+MSG => WTF dude!
+msf  auxiliary(sms_spoof_smspm) > set BALANCE true
+BALANCE => true
+msf  auxiliary(sms_spoof_smspm) > run    
+
+[*] You have 3.699€ on this account
+[*] Auxiliary module execution completed
+msf  auxiliary(sms_spoof_smspm) > set BALANCE false
+BALANCE => false
+msf  auxiliary(sms_spoof_smspm) > run
+
+[*] Send from w00t to 33650044080
+[*] Message: WTF dude!
+[*] Send successfully, id=8dd01977644a1602fed45c2208de7688
+[*] You have 3.629€ on this account
+[*] Auxiliary module execution completed
+msf  auxiliary(sms_spoof_smspm) >
+
+
